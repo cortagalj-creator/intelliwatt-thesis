@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Intelliwatt Dashboard</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#1f2937" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar">
+    <div class="nav-title">Intelliwatt</div>
+    <div class="nav-links">
+      <a href="index.html" class="active">Dashboard</a>
+      <a href="appliances.html">Appliances</a>
+      <a href="balance.html">Prepaid Balance</a>
+      <a href="ai.html">AI Assistant</a>
+      <a href="history.html">History</a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <h1>Dashboard</h1>
+
+    <p class="subtext">
+      This dashboard shows real-time electricity monitoring data including total power usage, estimated cost,
+      room temperature, and prepaid balance status.
+    </p>
+
+    <!-- ✅ ADDED: shows last backend update time -->
+    <p id="updatedAt" class="subtext" style="margin-top:-10px;"></p>
+
+    <div class="badge-row">
+      <span class="badge">Real-time Monitoring</span>
+      <span class="badge">Prepaid Balance Tracking</span>
+      <span class="badge">AI Energy Assistant</span>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="card">
+        <p>⚡ Total Power</p>
+        <h2 id="power">---</h2>
+      </div>
+
+      <div class="card">
+        <p>💰 Estimated Cost</p>
+        <h2 id="cost">---</h2>
+      </div>
+
+      <div class="card">
+        <p>🌡 Room Temperature</p>
+        <h2 id="temp">---</h2>
+      </div>
+
+      <div class="card">
+        <p>💳 Prepaid Balance</p>
+        <h2 id="balance">---</h2>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./service-worker.js");
+    }
+  </script>
+</body>
+</html>

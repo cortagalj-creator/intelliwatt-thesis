@@ -1,0 +1,21 @@
+{
+  "name": "Intelliwatt",
+  "short_name": "Intelliwatt",
+  "description": "Electricity monitoring app with prepaid balance tracking, appliance monitoring, usage history, and AI energy assistant.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4f6f8",
+  "theme_color": "#1f2937",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

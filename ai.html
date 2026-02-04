@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Intelliwatt AI Assistant</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1f2937">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-title">Intelliwatt</div>
+    <div class="nav-links">
+      <a href="index.html" class="active">Dashboard</a>
+      <a href="appliances.html" class="active">Appliances</a>
+      <a href="balance.html" class="active">Prepaid Balance</a>
+      <a href="ai.html" class="active">AI Assistant</a>
+      <a href="history.html" class="active">History</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>AI Energy-Saving Assistant</h1>
+    <p style="color:#555; margin-top:-10px;">
+      Ask questions about electricity usage, saving energy, appliances, and prepaid balance.
+    </p>
+
+    <div class="chat-card">
+      <div id="chatBox" class="chat-box">
+        <div class="bot-msg">
+          👋 Hi! I’m Intelliwatt AI Assistant. Ask me how to save electricity or manage your power usage.
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <input id="userInput" class="chat-input" type="text" placeholder="Type your question (energy-saving only)...">
+        <button id="sendBtn" class="btn chat-send-btn">Send</button>
+      </div>
+
+      <p id="chatHint" style="margin-top:10px; color:#777; font-size:14px;">
+        Example: “How can I reduce my AC electricity consumption?”
+      </p>
+    </div>
+  </div>
+
+  <script src="js/ai.js?v=3"></script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./service-worker.js");
+  }
+</script>
+</body>
+</html>

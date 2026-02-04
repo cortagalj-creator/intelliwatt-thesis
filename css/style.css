@@ -1,0 +1,463 @@
+/* ===== Intelliwatt Final UI CSS ===== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #f4f6f8, #ffffff);
+  color: #111827;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  background-color: #1f2937;
+  color: white;
+  padding: 16px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Optional: add class="active" to the current page link */
+.nav-links a.active {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+  padding: 45px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 36px;
+  margin: 0 0 14px 0;
+}
+
+/* ===== DASHBOARD/GRID LAYOUT ===== */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 25px;
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: white;
+  padding: 26px;
+  border-radius: 16px;
+  border: 1px solid #eef0f3;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14);
+}
+
+.card p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.card h2 {
+  margin-top: 12px;
+  font-size: 30px;
+  font-weight: 800;
+  color: #111827;
+}
+
+/* ===== FORMS / INPUTS / BUTTONS ===== */
+.label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  color: #4b5563;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  outline: none;
+  background: #ffffff;
+}
+
+.input:focus {
+  border-color: #9ca3af;
+}
+
+.btn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 11px 12px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #1f2937;
+  color: white;
+  font-weight: 800;
+  transition: opacity 0.2s ease, transform 0.05s ease;
+}
+
+.btn:hover {
+  opacity: 0.92;
+}
+
+.btn:active {
+  transform: scale(0.99);
+}
+
+.btn-danger {
+  background: #b91c1c;
+}
+
+/* History view mode buttons */
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.btn-row .btn {
+  width: auto;
+  flex: 1;
+}
+
+/* ===== TABLE (HISTORY) ===== */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.table th, .table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+}
+
+.table th {
+  background: #f4f6f8;
+  color: #111827;
+  font-weight: 800;
+}
+
+/* Zebra rows for readability */
+.table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+/* ===== CHAT UI ===== */
+.chat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #eef0f3;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+  margin-top: 20px;
+}
+
+.chat-box {
+  height: 360px;
+  overflow-y: auto;
+  padding: 15px;
+  background: #f4f6f8;
+  border-radius: 14px;
+  border: 1px solid #eef0f3;
+}
+
+.bot-msg, .user-msg {
+  max-width: 78%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  margin: 10px 0;
+  line-height: 1.45;
+  font-size: 15px;
+}
+
+.bot-msg {
+  background: white;
+  border: 1px solid #e5e7eb;
+  color: #111827;
+}
+
+.user-msg {
+  background: #1f2937;
+  color: white;
+  margin-left: auto;
+}
+
+.chat-input-area {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  outline: none;
+}
+
+.chat-input:focus {
+  border-color: #9ca3af;
+}
+
+.chat-send-btn {
+  width: 120px;
+}
+
+.typing {
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* ===== DASHBOARD DESCRIPTION + BADGES ===== */
+.subtext {
+  color: #4b5563;
+  margin-top: -4px;
+  margin-bottom: 18px;
+  max-width: 900px;
+  line-height: 1.55;
+  font-size: 15px;
+}
+
+.badge-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.badge {
+  background: #e5e7eb;
+  color: #111827;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* ===== RESPONSIVE (MOBILE) ===== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 16px 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+  }
+
+  .container {
+    padding: 25px 18px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .chat-input-area {
+    flex-direction: column;
+  }
+
+  .chat-send-btn {
+    width: 100%;
+  }
+}
+
+/* Fix history view mode buttons overflowing */
+.btn-row {
+  flex-wrap: wrap;
+}
+
+.btn-row .btn {
+  flex: 1 1 90px;
+  font-size: 14px;
+  padding: 10px;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #374151;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: #1f2937;
+  opacity: 0.12;
+}
+
+/* =========================
+   MOBILE RESPONSIVE (PHONE)
+   Paste at bottom of style.css
+   ========================= */
+
+@media (max-width: 768px) {
+  /* General spacing */
+  .container {
+    padding: 18px;
+  }
+
+  h1 {
+    font-size: 28px;
+    margin-bottom: 18px;
+  }
+
+  .subtext {
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+
+  /* Navbar: stack title + links nicely */
+  .navbar {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .nav-title {
+    font-size: 18px;
+  }
+
+  .nav-links {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .nav-links a {
+    margin-left: 0;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.10);
+    font-size: 13px;
+  }
+
+  /* Cards/grid: 1 column on mobile */
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .card {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .card h2 {
+    font-size: 24px;
+  }
+
+  /* Buttons and inputs: bigger touch targets */
+  .btn, .input, .chat-input {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .btn-row {
+    flex-wrap: wrap; /* allows buttons to wrap if needed */
+  }
+
+  .btn-row .btn {
+    min-width: 120px;
+    flex: 1;
+  }
+
+  /* Chat: more usable on phone */
+  .chat-card {
+    padding: 16px;
+  }
+
+  .chat-box {
+    height: 260px; /* smaller so it fits phone screens */
+    padding: 12px;
+  }
+
+  .chat-input-area {
+    flex-direction: column;
+  }
+
+  .chat-send-btn {
+    width: 100%;
+  }
+
+  /* Tables: allow horizontal scroll on phone */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+  }
+
+  .table {
+    min-width: 560px; /* forces scroll instead of squishing text */
+  }
+}
+
+/* Small phones */
+@media (max-width: 420px) {
+  h1 {
+    font-size: 24px;
+  }
+  .nav-links a {
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+}

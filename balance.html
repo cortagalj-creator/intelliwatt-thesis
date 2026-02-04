@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Intelliwatt Prepaid Balance</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#1f2937" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-title">Intelliwatt</div>
+    <div class="nav-links">
+      <a href="index.html">Dashboard</a>
+      <a href="appliances.html">Appliances</a>
+      <a href="balance.html" class="active">Prepaid Balance</a>
+      <a href="ai.html">AI Assistant</a>
+      <a href="history.html">History</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Prepaid Balance</h1>
+    <p class="subtext">Balance values are loaded from the backend API.</p>
+
+    <div class="dashboard-grid">
+      <!-- Current balance -->
+      <div class="card">
+        <p>Current Balance</p>
+        <h2 id="currentBalance">₱---</h2>
+        <p id="balanceStatus" style="margin-top:12px; font-weight:600;"></p>
+      </div>
+
+      <!-- ✅ Toggle mode -->
+      <div class="card">
+        <p style="margin-bottom:10px;">Prepaid Balance Mode</p>
+
+        <label style="display:flex; gap:10px; align-items:center;">
+          <input type="checkbox" id="prepaidToggle" />
+          <span id="prepaidToggleLabel">Loading...</span>
+        </label>
+
+        <p style="color:#666; font-size:14px; margin-top:8px;">
+          When OFF, prepaid balance and low-balance warnings are hidden/disabled.
+        </p>
+      </div>
+
+      <!-- Threshold -->
+      <div class="card">
+        <p>Low Balance Alert Threshold</p>
+        <h2 id="thresholdValue">₱---</h2>
+
+        <label class="label">Set threshold (₱)</label>
+        <input class="input" type="number" id="thresholdInput" placeholder="e.g. 20">
+
+        <button class="btn" id="saveThresholdBtn">Save Threshold</button>
+      </div>
+
+      <!-- Add balance -->
+      <div class="card">
+        <p>Add Balance (Load)</p>
+
+        <label class="label">Enter amount (₱)</label>
+        <input class="input" type="number" id="addBalanceInput" placeholder="e.g. 50">
+
+        <button class="btn" id="addBalanceBtn">Add Balance</button>
+      </div>
+
+      <!-- Simulation -->
+      <div class="card">
+        <p><b>Simulation (Prototype)</b></p>
+        <p style="margin-top:8px; color:#555;">
+          This button simulates power usage and deducts balance.
+        </p>
+
+        <button class="btn btn-danger" id="simulateBtn">Simulate Usage Deduction</button>
+        <p style="margin-top:10px; color:#555;">(Used for testing alerts)</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/balance.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./service-worker.js");
+    }
+  </script>
+</body>
+</html>

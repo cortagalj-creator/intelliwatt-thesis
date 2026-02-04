@@ -1,0 +1,67 @@
+<!-- appliances.html (FINAL) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Intelliwatt Appliances</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#1f2937" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-title">Intelliwatt</div>
+    <div class="nav-links">
+      <a href="index.html">Dashboard</a>
+      <a href="appliances.html" class="active">Appliances</a>
+      <a href="balance.html">Prepaid Balance</a>
+      <a href="ai.html">AI Assistant</a>
+      <a href="history.html">History</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Appliance Monitoring</h1>
+    <p class="subtext">
+      Appliances are loaded from the backend API. Category is automatically determined by power (Watts).
+    </p>
+
+    <!-- ✅ ADD APPLIANCE FORM (NO CATEGORY) -->
+    <div class="card" style="max-width: 900px; margin-bottom: 18px;">
+      <p style="margin-bottom: 10px;"><b>Add Appliance</b></p>
+
+      <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+        <div>
+          <label class="label">Appliance Name</label>
+          <input class="input" id="nameInput" placeholder="e.g., Rice Cooker" />
+        </div>
+
+        <div>
+          <label class="label">Power (Watts)</label>
+          <input class="input" id="powerInput" type="number" min="0" placeholder="e.g., 700" />
+        </div>
+
+        <div style="display:flex; align-items:end;">
+          <button class="btn" id="addBtn">Add Appliance</button>
+        </div>
+      </div>
+
+      <p id="applianceMsg" style="margin-top: 10px; color:#555;"></p>
+    </div>
+
+    <!-- ✅ APPLIANCES GRID -->
+    <div class="dashboard-grid" id="applianceGrid">
+      <!-- JS will fill this -->
+    </div>
+  </div>
+
+  <script src="js/appliances.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./service-worker.js");
+    }
+  </script>
+</body>
+</html>

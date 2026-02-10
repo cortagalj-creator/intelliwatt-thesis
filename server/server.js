@@ -131,6 +131,24 @@ app.get("/api/test", (req, res) => {
 });
 
 /* =========================
+   ✅ COST ESTIMATE (FIXES dashboard cost = ---)
+========================= */
+app.get("/api/cost/estimate", (req, res) => {
+  const powerW = Number(req.query.power_w ?? 0);
+  const hours = Number(req.query.hours ?? 1);
+  const rate = Number(req.query.rate ?? DEFAULT_RATE_PER_KWH);
+
+  if (![powerW, hours, rate].every(Number.isFinite)) {
+    return res.status(400).json({ error: "Invalid parameters" });
+  }
+
+  const kwh = (powerW / 1000) * hours;
+  const cost = kwh * rate;
+
+  res.json({ kwh, cost });
+});
+
+/* =========================
    ✅ SETTINGS (Prepaid Mode)
 ========================= */
 app.get("/api/settings/prepaid-mode", async (req, res) => {
@@ -303,12 +321,13 @@ app.delete("/api/appliances/:id", async (req, res) => {
 });
 
 /* =========================
-   ✅ HISTORY
+   ✅ HISTORY (FIXED for your history.js)
+   history.js expects:
+   { mode, total_kwh, total_cost, records:[{date,kwh,cost}] }
 ========================= */
 app.get("/api/history", async (req, res) => {
   try {
     const mode = String(req.query.mode || "daily").toLowerCase();
-    const rate = Number(req.query.rate ?? DEFAULT_RATE_PER_KWH);
 
     let groupExpr;
     if (mode === "weekly") {
@@ -323,23 +342,29 @@ app.get("/api/history", async (req, res) => {
       `
       SELECT
         ${groupExpr} AS key,
-        SUM(kwh) AS total_kwh,
-        SUM(kwh) * ? AS total_cost
+        SUM(kwh) AS kwh,
+        SUM(cost) AS cost
       FROM energy_logs
       GROUP BY key
       ORDER BY key DESC
       LIMIT 60
-      `,
-      [rate]
+      `
     );
+
+    const totalRow = await get(`SELECT SUM(kwh) AS total_kwh, SUM(cost) AS total_cost FROM energy_logs`);
 
     const records = rows.map((r) => ({
       date: r.key,
-      kwh: Number((r.total_kwh ?? 0).toFixed(2)),
-      cost: Number((r.total_cost ?? 0).toFixed(2)),
+      kwh: Number(r.kwh ?? 0),
+      cost: Number(r.cost ?? 0),
     }));
 
-    res.json({ mode, rate, records });
+    res.json({
+      mode,
+      total_kwh: Number(totalRow?.total_kwh ?? 0),
+      total_cost: Number(totalRow?.total_cost ?? 0),
+      records,
+    });
   } catch (err) {
     console.error("GET /api/history error:", err);
     res.status(500).json({ error: "DB error" });
@@ -369,13 +394,12 @@ app.get("/api/ai/context", async (req, res) => {
       SELECT
         strftime('%Y-%m-%d', created_at) AS date,
         SUM(kwh) AS kwh,
-        SUM(kwh) * ? AS cost
+        SUM(cost) AS cost
       FROM energy_logs
       GROUP BY date
       ORDER BY date DESC
       LIMIT 7
-      `,
-      [DEFAULT_RATE_PER_KWH]
+      `
     );
 
     res.json({
@@ -387,8 +411,8 @@ app.get("/api/ai/context", async (req, res) => {
       balance: { prepaid_balance: 45.5, low_threshold: 20.0 }, // still mock
       history_last_7_days: history7.map((r) => ({
         date: r.date,
-        kwh: Number((r.kwh ?? 0).toFixed(2)),
-        cost: Number((r.cost ?? 0).toFixed(2)),
+        kwh: Number(r.kwh ?? 0),
+        cost: Number(r.cost ?? 0),
       })),
     });
   } catch (err) {

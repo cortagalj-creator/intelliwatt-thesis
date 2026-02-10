@@ -251,6 +251,30 @@ app.get("/api/balance", (req, res) => {
 });
 
 /* =========================
+   ✅ COST ESTIMATION
+========================= */
+app.get("/api/cost/estimate", (req, res) => {
+  const powerW = Number(req.query.power_w);
+  const hours = Number(req.query.hours);
+  const rate = Number(req.query.rate ?? DEFAULT_RATE_PER_KWH);
+
+  if (!Number.isFinite(powerW) || !Number.isFinite(hours)) {
+    return res.status(400).json({ error: "Invalid power_w or hours" });
+  }
+
+  const kwh = (powerW / 1000) * hours;
+  const cost = kwh * rate;
+
+  res.json({
+    power_w: powerW,
+    hours,
+    rate,
+    kwh: Number(kwh.toFixed(4)),
+    cost: Number(cost.toFixed(2)),
+  });
+});
+
+/* =========================
    ✅ APPLIANCES
 ========================= */
 app.get("/api/appliances", async (req, res) => {
